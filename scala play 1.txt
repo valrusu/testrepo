@@ -1,0 +1,98 @@
+ask the user 3 times
+to give you 2 numbers
+and display the sum
+
+
+
+ask the user for number 1
+ask the user for number 2
+calculate the sum
+display the sum
+ask the user for number 1
+ask the user for number 2
+calculate the sum
+display the sum
+ask the user for number 1
+ask the user for number 2
+calculate the sum
+display the sum
+
+=====
+
+function sum (number 1, number 2) {
+ask the user for number 1
+ask the user for number 2
+calculate the sum
+display the sum
+}
+
+loop 1000 times
+ask the user for number 1
+ask the user for number 2
+call the sum function
+end loop
+
+
+val df = spark.read.options(
+  Map(
+    "inferSchema"->"true",
+    "header"->"true"
+   )
+).csv(
+  "vehicletransaction.1.csv"
+)
+
+======
+
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.SaveMode
+import org.apache.spark.sql.avro
+
+val schema = (new StructType).add(
+  "plazaid",IntegerType,true
+).add(
+  "lanenum",IntegerType,true
+).add(
+  "transtmst",TimestampType,true
+)
+
+val df = spark.read.options(
+  Map(
+    "header" -> "true",
+    "timestampFormat" -> "yyyy-MM-dd HH:mm:ss.SSSSSS"
+   )
+).schema(schema).csv(
+  "vehicletransaction.1.csv"
+)
+
+df.show(false)
+
+df.rdd.getNumPartitions
+
+
+df.write.mode("overwrite").option("timestampFormat","yyyy-MM-dd HH:mm:ss.SSSSSS").csv("vehicletransaction.2.csv")
+
+df.write.mode("overwrite").option("timestampFormat","yyyy-MM-dd HH:mm:ss.SSSSSS").format("avro").save("vehicletransaction.2.avro")
+
+df.write.format("avro").save("vehicletransaction.2.avro")
+df.write.mode("overwrite").format("avro").save("vehicletransaction.2.avro")
+df.write.mode(SaveMode.Overwrite).format("avro").save("vehicletransaction.2.avro")
+df.write.mode(SaveMode.Overwrite).partitionBy("plazaid").format("avro").save("vehicletransaction.2.avro")
+
+df.write.mode(SaveMode.Overwrite).format("parquet").save("vehicletransaction.3.parquet")
+
+	!?! this worked??
+sql("select * from vehicletransaction").show();
+
+======
+
+drop table vehicletransaction;
+
+create temporary view vt (
+  plazaid int, 
+  lanenum int, 
+  transtmst timestamp
+) using csv options (
+  path='/Users/valentinrusu/vehicletransaction.1.csv',
+  header=true
+);
