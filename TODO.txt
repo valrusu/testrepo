@@ -1,0 +1,9 @@
+- read data from DB (Oracle), write to csv
+- read data from DB (Oracle), write to orc file
+- does it read it full in mem? then to disk? can I stream it from DB to a local orc file?
+- read generated orc files and query directly
+- import the orc files back into the DB
+	- in the same target tables
+	- in different tables or schema
+- compile spark program and run from script (scala)
+- 
