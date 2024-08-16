@@ -1,3 +1,11 @@
+
+/*
+javac HttpsUrlFetcher.java
+java -cp . HttpsUrlFetcher "https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.132.wsdl?WSDL"
+java -cp . HttpsUrlFetcher "https://uatttcairrulesdatabase-service.amadeus.com/TTCRulesWS/TTCRulesWS.asmx"
+java -cp . HttpsUrlFetcher https://example.com
+*/
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -8,7 +16,11 @@ public class HttpsUrlFetcher {
     public static void main(String[] args) {
         try {
             // URL to fetch
-            URL url = new URL("https://example.com");
+            //URL url = new URL("https://example.com");
+            //URL url = new URL("https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.132.wsdl?WSDL");
+        System.out.println(args[0]);
+            URL url = new URL(args[0]);
+        System.out.println(url);
 
             // Open a connection
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
