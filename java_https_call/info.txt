@@ -1,0 +1,29 @@
+java -cp . HttpsUrlFetcher "https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.132.wsdl?WSDL"
+
+fails
+
+
+
+openssl s_client -connect ics2wstest.ic3.com:443
+GET /commerce/1.x/transactionProcessor/CyberSourceTransaction_1.132.wsdl?WSDL HTTP/1.0
+
+works
+
+
+
+java -cp . HttpsUrlFetcher "https://uatttcairrulesdatabase-service.amadeus.com/TTCRulesWS/TTCRulesWS.asmx"
+
+works
+
+
+a = ics2wstest.ic3.com
+b = DigiCert EV RSA CA G2
+c = DigiCert Global Root G2
+
+keytool -importcert -keystore /opt/java/jre/lib/security/cacerts -file c
+
+
+
+java -cp . HttpsUrlFetcher "https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.132.wsdl?WSDL"
+
+works
