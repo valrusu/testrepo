@@ -1,0 +1,6 @@
+create a simple hello app in go; try it
+
+add user root - based on oraclelinux
+
+try lf as root
+
